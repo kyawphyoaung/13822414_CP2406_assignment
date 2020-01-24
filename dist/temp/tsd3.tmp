@@ -1,0 +1,20 @@
+Begin_City
+  Begin_RoadMap
+    Begin_Line
+      xy=702.0393755720934 , 364.79074367211626
+      xy=857.0 , 364.0
+    End_Line
+    Begin_Line
+      xy=11.375 , 185.140625
+      xy=284.0 , 192.0
+      xy=290.0 , 372.0
+      xy=702.0393755720934 , 364.79074367211626
+    End_Line
+    Begin_Line
+      xy=697.0 , 10.5
+      xy=702.0393755720934 , 364.79074367211626
+    End_Line
+    Begin_Line
+    End_Line
+  End_RoadMap
+End_City

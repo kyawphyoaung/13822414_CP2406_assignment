@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="TrafficSimulator">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/TrafficSimulator.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
