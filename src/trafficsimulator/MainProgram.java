@@ -21,9 +21,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.Timer;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
 /**
  *
@@ -31,7 +28,7 @@ import javax.swing.filechooser.FileFilter;
  */
 public class MainProgram extends javax.swing.JFrame {
     File currentPathSetting;
-    File currentFile=null;
+    File data_File =null;
     boolean flagRun=false;
     CityPannel cityPannel=null;
     JFrameStatistics statisticsDialog=null;
@@ -98,7 +95,7 @@ public class MainProgram extends javax.swing.JFrame {
             try {
                 BufferedReader br=new BufferedReader(new FileReader(currentPathSetting));
                 String path=br.readLine();
-                currentFile=new File(path);
+                data_File =new File(path);
             } catch (Exception ex) {
                 Logger.getLogger(MainProgram.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -171,7 +168,7 @@ public class MainProgram extends javax.swing.JFrame {
         cityPannel.createNew();
     }
     private void navBarSaveButtonClick(ActionEvent evt){
-        JFileChooser fileChooser = new JFileChooser(currentFile);
+        JFileChooser fileChooser = new JFileChooser(data_File);
         fileChooser.addChoosableFileFilter(fileFilter);
         fileChooser.setAcceptAllFileFilterUsed(true);
         int retval = fileChooser.showSaveDialog(this);
@@ -181,21 +178,21 @@ public class MainProgram extends javax.swing.JFrame {
             if (!file.getName().toLowerCase().endsWith(Constants.FILE_EXT)) {
                 file = new File(file.getParentFile(), file.getName() + Constants.FILE_EXT);
             }
-            currentFile=file;
-            if(!cityPannel.save(currentFile)){
+            data_File =file;
+            if(!cityPannel.save(data_File)){
                 JOptionPane.showConfirmDialog(this, "Can't save");
             }
         }
     }
     private void navBarOpenButtonClick(ActionEvent evt){
-        JFileChooser fileChooser = new JFileChooser(currentFile);
+        JFileChooser fileChooser = new JFileChooser(data_File);
         fileChooser.addChoosableFileFilter(fileFilter);
         fileChooser.setAcceptAllFileFilterUsed(true);
         int retval = fileChooser.showOpenDialog(this);
         if (retval == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             if (file == null)return;
-            currentFile=file;
+            data_File =file;
             if(!cityPannel.load(file)){
                 JOptionPane.showMessageDialog(this, "Can't open");
             }
@@ -207,12 +204,12 @@ public class MainProgram extends javax.swing.JFrame {
     }
     private void formClosing(){
         try {
-            if(currentFile!=null){
+            if(data_File !=null){
                 PrintWriter pw=new PrintWriter(currentPathSetting);
-                if(currentFile.isFile())
-                    pw.println(currentFile.getAbsoluteFile().getParent());
-                else if(currentFile.isDirectory())
-                    pw.println(currentFile.getAbsoluteFile());
+                if(data_File.isFile())
+                    pw.println(data_File.getAbsoluteFile().getParent());
+                else if(data_File.isDirectory())
+                    pw.println(data_File.getAbsoluteFile());
                 pw.flush();
                 pw.close();                
             }
